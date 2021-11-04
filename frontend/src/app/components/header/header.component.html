@@ -1,7 +1,8 @@
 <header>
   <h1>Stripe Node.js</h1>
+  <a title="Home" [routerLink]="['/home']">Home</a>
+  <a title="Shop" [routerLink]="['/shop']">Shop</a>
   <app-login *ngIf="!authenticationService.isLogged()"></app-login>
-  <a [title]="Shop" [routerLink]="app-shop">]>Shop</a>
   <button class="logout" mat-button *ngIf="authenticationService.isLogged()" (click)="authenticationService.logout()">
     logout
   </button>

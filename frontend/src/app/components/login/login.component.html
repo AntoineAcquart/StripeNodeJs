@@ -23,6 +23,6 @@
         </button>
     </form>
     <div class="error">
-        <mat-error *ngIf="loginFormError">{{ loginFormError }}</mat-error>
+        <mat-error *ngIf="loginFormError != ''">{{ loginFormError }}</mat-error>
     </div>
 </div>

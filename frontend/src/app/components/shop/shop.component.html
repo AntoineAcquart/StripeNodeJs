@@ -1,7 +1,17 @@
 <main>
-    <div *ngIf="authenticationService.isLogged()" class="content">
-        <p class="welcome-text">Salut <span class="username">{{ getUsername() }}</span> !</p>
-        <p class="token">{{ getToken() }}</p>
+    <div class="items">
+        <button mat-button (click)="purchase('1')">purchase item 1</button>
+        <button mat-button (click)="purchase('2')">purchase item 2</button>
+        <button mat-button (click)="purchase('3')">purchase item 3</button>
     </div>
-
+    <div class="error" *ngIf="loginError">
+        <p>You must be logged to purchase something !</p>
+    </div>
+    <div class="success" *ngIf="success">
+        <p>success</p>
+        <p>Item {{ itemPurchased }} purchased !</p>
+    </div>
+    <div class="cancel" *ngIf="cancel">
+        <p>purchase canceled</p>
+    </div>
 </main>

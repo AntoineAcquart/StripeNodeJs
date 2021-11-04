@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Component, Inject } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { AuthenticationService } from 'src/app/services/authentication.service'
 
 /**
  * This component is a modal that display a creation slide form with file upload
@@ -17,9 +17,9 @@ export class RegisterDialogComponent {
     username: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required]),
     confirmPassword: new FormControl(null, [Validators.required])
-  });
+  })
 
-  registerFormError: string;
+  registerFormError: string = ""
 
   constructor(
     private readonly authenticationService: AuthenticationService,
@@ -27,36 +27,36 @@ export class RegisterDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   register() {
-    delete this.registerFormError;
+    this.registerFormError = ""
     if (this.registerGroup.invalid) {
-      this.registerFormError = 'Tous les champs ne sont pas valides.';
-      return;
+      this.registerFormError = 'Tous les champs ne sont pas valides.'
+      return
     }
 
-    let username: string = this.registerGroup.get("username").value;
-    let password: string = this.registerGroup.get("password").value;
-    let confirmPassword: string = this.registerGroup.get("confirmPassword").value;
+    let username: string = this.registerGroup.get("username")?.value || ""
+    let password: string = this.registerGroup.get("password")?.value || ""
+    let confirmPassword: string = this.registerGroup.get("confirmPassword")?.value || ""
 
     if (password != confirmPassword) {
-      this.registerFormError = 'Les mots de passe ne correspondent pas.';
-      return;
+      this.registerFormError = 'Les mots de passe ne correspondent pas.'
+      return
     }
 
     this.authenticationService.register(username, password).subscribe({
       next: response => {
-        localStorage.setItem('username', response.username);
-        localStorage.setItem('token', response.token);
-        this.onNoClick();
+        localStorage.setItem('username', response.username)
+        localStorage.setItem('token', response.token)
+        this.onNoClick()
       },
       error: err => {
-        console.log(err);
-        this.registerFormError = "Ce nom d'utilisateur n'est pas disponible.";
+        console.log(err)
+        this.registerFormError = "Ce nom d'utilisateur n'est pas disponible."
       }
-    });
+    })
   }
 
 }

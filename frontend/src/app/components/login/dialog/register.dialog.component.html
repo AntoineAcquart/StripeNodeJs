@@ -16,7 +16,7 @@
           <input matInput type="password" formControlName="confirmPassword" />
         </mat-form-field>
         <div class="error">
-          <mat-error *ngIf="registerFormError">{{ registerFormError }}</mat-error>
+          <mat-error *ngIf="registerFormError != ''">{{ registerFormError }}</mat-error>
         </div>
         <div>
           <button class="register-button" mat-icon-button matTooltip="register" type="submit" (click)="register()"
